@@ -24,10 +24,10 @@ namespace DiscordMarkdownRandomizer
             string outputString = "";
 
             int randOut;
-            int lastRand = 8; //rand will never output 8
+            int lastRand = 16; //rand will never output 16
             foreach(char c in userInput)
             {
-                randOut = rand.Next(0,7);
+                randOut = rand.Next(0,15);
 
                 if(c == ' ')
                 {
@@ -117,9 +117,9 @@ namespace DiscordMarkdownRandomizer
                         continue;
                     case 7:
                         //Underline bold italics
-                        if (lastRand == 1)
+                        if (lastRand == 7)
                         {
-                            //already underline bold italics, inserts c into last underline bold italics block
+                            //already underline bold italics, inserts c into last block of same format
                             outputString = outputString.Insert(outputString.LastIndexOf('*') - 2, c.ToString());
                             lastRand = randOut;
                             continue;
@@ -128,6 +128,118 @@ namespace DiscordMarkdownRandomizer
                         lastRand = randOut;
                         continue;
 
+                    case 8:
+                        //strikethrough
+                        if (lastRand == 8)
+                        {
+                            //already underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('~') - 1, c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "~~" + c + "~~ ";
+                        lastRand = randOut;
+                        continue;
+
+                    case 9:
+                        //strikethrough italics
+                        if (lastRand == 9)
+                        {
+                            //already underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('*'), c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "~~*" + c + "*~~ ";
+                        lastRand = randOut;
+                        continue;
+
+                    case 10:
+                        //strikethrough bold
+                        if (lastRand == 10)
+                        {
+                            //already underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('*') - 1, c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "~~**" + c + "**~~ ";
+                        lastRand = randOut;
+                        continue;
+
+                    case 11:
+                        //strikethrough underline
+                        if (lastRand == 11)
+                        {
+                            //already underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('~') - 1, c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "__~~" + c + "~~__ ";
+                        lastRand = randOut;
+                        continue;
+
+                    case 12:
+                        //strikethrough bold italic
+                        if (lastRand == 12)
+                        {
+                            //already underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('*') - 2, c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "~~***" + c + "***~~ ";
+                        lastRand = randOut;
+                        continue;
+
+                    case 13:
+                        //strikethrough underline italic
+                        if (lastRand == 13)
+                        {
+                            //already underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('*'), c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "__~~*" + c + "*~~__ ";
+                        lastRand = randOut;
+                        continue;
+
+                    case 14:
+                        //strikethrough underline bold
+                        if (lastRand == 14)
+                        {
+                            //already underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('*') - 1, c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "__~~**" + c + "**~~__ ";
+                        lastRand = randOut;
+                        continue;
+
+                    case 15:
+                        //strikethough underline bold italics
+                        //maximum formatting
+                        if (lastRand == 15)
+                        {
+                            //already strikethrough underline bold italics, inserts c into last block of same format
+                            outputString = outputString.Insert(outputString.LastIndexOf('*') - 2, c.ToString());
+                            lastRand = randOut;
+                            continue;
+                        }
+
+                        outputString = outputString + "__~~***" + c + "***~~__ ";
+                        lastRand = randOut;
+                        continue;
                 }
             }
 
